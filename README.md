@@ -1,7 +1,7 @@
 Persian Wordifier converts simple numbers to words.
 for example you can use this:
 
-```
+```javascript
 var a = 235000;
 var b = wordifyfa(a);
 console.log(b); // دویست و سی و پنج هزار
@@ -30,12 +30,14 @@ var d = wordifyRialsInTomans(a); // بیست و سه هزار و پانصد تو
 ```javascript
 	wordifyRials(number) 
 	wordifyRials(400); // چهارصد ریال
-	````
+```
 	
 ##3 converts number that is in Rials to Tomans and wordifies it
 
+```javascript
 	wordifyRialsInTomans(number) 
 	wordifyRialsInTomans(5000); // پانصد تومان
-	
+```
+
 # more info:
 this code now supports max to 999,999,999,999,999. is it sufficient?
