@@ -9,12 +9,16 @@ var d = wordifyRialsInTomans(a); // بیست و سه هزار و پانصد تو
 
 installation:
 1- add this line of code in your html.
-	<script src="wordifyfa.js"></script>
+```html
+<script src="wordifyfa.js"></script>
+```	
 2- use the code.
-	<script>
-		var a = 93390;
-		var b = wordifyfa(a); // نود و سه هزار و سیصد و نود
-	</script>
+```javascript
+<script>
+    var a = 93390;
+    var b = wordifyfa(a); // نود و سه هزار و سیصد و نود
+</script>
+```	
 
 functions:
 	wordifyfa(number) : converts number to words. ex: wordifyfa(43); // چهل و سه
