@@ -9,6 +9,11 @@ var wordifyfa = function (num, level) {
     if (num === null) {
         return "";
 	}
+	// convert negative number to positive and get wordify value
+	if (num<0) {
+		num = num * -1;
+		return "منفی " + wordifyfa(num, level); 
+	}
     if (num === 0) {
         if (level === 0) {
             return "صفر";
@@ -56,9 +61,12 @@ var wordifyRialsInTomans = function (num) {
 	'use strict';
     if (num >= 10) {
         num = parseInt(num / 10, 10);
+    } else if (num<=-10) {
+        num = parseInt(num/10,10);
     } else {
-        num = 0;
-    }
+		num=0;
+	}
+	
     return wordifyfa(num, 0) + " تومان";
 };
 

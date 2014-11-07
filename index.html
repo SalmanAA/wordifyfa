@@ -1,5 +1,7 @@
 <html>
 <head>
+	<meta http-equiv="Content-Language" content="fa">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body>
 	<script src="wordifyfa.js"></script>
@@ -12,7 +14,18 @@
 		document.write(a + ' = ' + c + "<br/>");
 		
 		var d = wordifyRialsInTomans(a);
-		document.write(a + ' = ' + d + "<br/>");		
+		document.write(a + ' = ' + d + "<br/>");
+		
+		var e = -500;
+		var f = wordifyfa(e);
+		document.write(e + ' = ' + f + "<br/>");
+		
+		var g = -2200;
+		var h = wordifyRialsInTomans(g);
+		document.write(g + ' = ' + h + "<br/>");
+		
+		var h = wordifyRials(g);
+		document.write(g + ' = ' + h + "<br/>");		
 	</script>
 </body>
 </html>
