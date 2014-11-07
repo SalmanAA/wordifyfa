@@ -14,6 +14,13 @@ var d = wordifyRialsInTomans(a); // بیست و سه هزار و پانصد تو
 ```html
 <script src="wordifyfa.js"></script>
 ```	
+
+or if you using Node.js 
+
+```javascipt 
+var wordifyfa = require('./wordifyfa.js');
+````
+
 2- use the code.
 ```javascript
     var a = 93390;
@@ -26,11 +33,23 @@ var d = wordifyRialsInTomans(a); // بیست و سه هزار و پانصد تو
 	wordifyfa(number) 
 	wordifyfa(43); // چهل و سه
 ```	
+
+or in Node.js :
+```javascript
+	var a = require('./wordifyfa.js');
+	a.wordifyfa(number);
+```
 ##2 converts number to words with Rial sign
 ```javascript
 	wordifyRials(number) 
 	wordifyRials(400); // چهارصد ریال
 ```
+
+or in Node : 
+```javascript
+	var a = require('./wordifyfa.js');
+	a.worifyfaRials(number);
+````
 	
 ##3 converts number that is in Rials to Tomans and wordifies it
 
@@ -39,5 +58,15 @@ var d = wordifyRialsInTomans(a); // بیست و سه هزار و پانصد تو
 	wordifyRialsInTomans(5000); // پانصد تومان
 ```
 
+or in Node : 
+```javascript
+	var a = require('./wordifyfa.js');
+	a.wordifyRialsInTomans(number);
+````
+
 # more info:
 this code now supports max to 999,999,999,999,999. is it sufficient?
+
+##Main Contributors
+- [Salman Arab Ameri](http://arabameri.com/)  
+- [Mohammad Bagher Ehtemam](https://github.com/MBehtemam)  

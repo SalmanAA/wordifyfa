@@ -62,3 +62,9 @@ var wordifyRialsInTomans = function (num) {
     return wordifyfa(num, 0) + " تومان";
 };
 
+if (typeof module !== 'undefined' && module.exports) {
+	module.exports.wordifyfa = wordifyfa;
+	module.exports.wordifyRials = wordifyRials;
+	module.exports.wordifyRialsInTomans = wordifyRialsInTomans;
+}
+
