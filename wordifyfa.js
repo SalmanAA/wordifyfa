@@ -1,14 +1,28 @@
 // Persian Wordifier
-// Version: 1.0
+// Version: 1.2
 // Author: Salman Arab Ameri
-// Publish: 2014-03-11
+// Publish: 2019-09-11
 // with use of ideas in http://www.dotnettips.info/post/626/%D8%AA%D8%A8%D8%AF%DB%8C%D9%84-%D8%B9%D8%AF%D8%AF-%D8%A8%D9%87-%D8%AD%D8%B1%D9%88%D9%81
 
 var wordifyfa = function (num, level) {
-	'use strict';
+    'use strict';
+    
+    function isCorrectNumber(num) {
+        return /^-?(\d{1,3},?)+(\.?\d+)?$/.test(num);
+    }
+
     if (num === null) {
         return "";
-	}
+    }
+    
+    level = level || 0;
+
+    // remove all non digits from string
+    if (level===0 && typeof num === "string" && isCorrectNumber(num)) {
+        num = parseInt(num.replace(/,/g,""));       
+    }
+
+
 	// convert negative number to positive and get wordify value
 	if (num<0) {
 		num = num * -1;

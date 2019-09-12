@@ -9,7 +9,16 @@ var c = wordifyRials(a); // دویست و سی و پنج هزار ریال
 var d = wordifyRialsInTomans(a); // بیست و سه هزار و پانصد تومان
 
 ```
-#installation:
+
+# update (2019-09-11)
+- string and thousands separated numbers now supported
+```javascript
+var a = '120,345,102';
+var b = wordifyfa(a);
+console.log(b); // یکصد و بیست میلیون و سیصد و چهل و پنج هزار و صد و یکصد و دو
+```
+
+# installation:
 1- add this line of code in your html.
 ```html
 <script src="wordifyfa.js"></script>
@@ -27,8 +36,8 @@ var wordifyfa = require('./wordifyfa.js');
     var b = wordifyfa(a); // نود و سه هزار و سیصد و نود
 ```	
 
-#functions:
-##1 converts number to words
+# functions:
+## 1 converts number to words
 ```javascript
 	wordifyfa(number) 
 	wordifyfa(43); // چهل و سه
@@ -39,7 +48,7 @@ or in Node.js :
 	var a = require('./wordifyfa.js');
 	a.wordifyfa(number);
 ```
-##2 converts number to words with Rial sign
+## 2 converts number to words with Rial sign
 ```javascript
 	wordifyRials(number) 
 	wordifyRials(400); // چهارصد ریال
@@ -51,7 +60,7 @@ or in Node :
 	a.worifyfaRials(number);
 ````
 	
-##3 converts number that is in Rials to Tomans and wordifies it
+## 3 converts number that is in Rials to Tomans and wordifies it
 
 ```javascript
 	wordifyRialsInTomans(number) 
@@ -67,6 +76,6 @@ or in Node :
 # more info:
 this code now supports max to 999,999,999,999,999. is it sufficient?
 
-##Main Contributors
+## Main Contributors
 - [Salman Arab Ameri](http://salmanapps.ir/)  
 - [Mohammad Bagher Ehtemam](https://github.com/MBehtemam)  
