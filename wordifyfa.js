@@ -4,53 +4,76 @@
 // Publish: 2019-09-11
 // with use of ideas in http://www.dotnettips.info/post/626/%D8%AA%D8%A8%D8%AF%DB%8C%D9%84-%D8%B9%D8%AF%D8%AF-%D8%A8%D9%87-%D8%AD%D8%B1%D9%88%D9%81
 
-var wordifyfa = function (num, level) {
+var wordifyfa = function(num, level) {
     'use strict';
-    
+
     function isCorrectNumber(num) {
         return /^-?(\d{1,3},?)+(\.?\d+)?$/.test(num);
+    }
+
+    function toEnglishDigits(num) {
+        if (typeof num !== 'string')
+            return num;
+        const faDigits = '۰۱۲۳۴۵۶۷۸۹';
+        const arDigits = '٠١٢٣٤٥٦٧٨٩';
+        var output = "";
+        for (var ipos = 0; ipos < num.length; ipos++) {
+
+            var faIndex = faDigits.indexOf(num[ipos]);
+            if (faIndex >= 0) {
+                output += faIndex.toString();
+                continue;
+            }
+            var arIndex = arDigits.indexOf(num[ipos]);
+            if (arIndex >= 0) {
+                output += arIndex.toString();
+                continue;
+            }
+            output += num[ipos];
+        }
+        return output;
     }
 
     if (num === null) {
         return "";
     }
-    
+    num = toEnglishDigits(num);
     level = level || 0;
 
     // remove all non digits from string
-    if (level===0 && typeof num === "string" && isCorrectNumber(num)) {
-        num = parseInt(num.replace(/,/g,""));       
+    if (level === 0 && typeof num === "string" && isCorrectNumber(num)) {
+        num = parseInt(num.replace(/,/g, ""));
     }
 
 
-	// convert negative number to positive and get wordify value
-	if (num<0) {
-		num = num * -1;
-		return "منفی " + wordifyfa(num, level); 
-	}
+    // convert negative number to positive and get wordify value
+    if (num < 0) {
+        num = num * -1;
+        return "منفی " + wordifyfa(num, level);
+    }
     if (num === 0) {
         if (level === 0) {
             return "صفر";
-		} else {
+        } else {
             return "";
-		}
-	}
-	var result = "",
-		yekan = [" یک ", " دو ", " سه ", " چهار ", " پنج ", " شش ", " هفت ", " هشت ", " نه "],
-		dahgan = [" بیست ", " سی ", " چهل ", " پنجاه ", " شصت ", " هفتاد ", " هشتاد ", " نود "],
-		sadgan = [" یکصد ", " دویست ", " سیصد ", " چهارصد ", " پانصد ", " ششصد ", " هفتصد ", " هشتصد ", " نهصد "],
-		dah = [" ده ", " یازده ", " دوازده ", " سیزده ", " چهارده ", " پانزده ", " شانزده ", " هفده ", " هیجده ", " نوزده "];
+        }
+    }
+    var result = "",
+        yekan = [" یک ", " دو ", " سه ", " چهار ", " پنج ", " شش ", " هفت ", " هشت ", " نه "],
+        dahgan = [" بیست ", " سی ", " چهل ", " پنجاه ", " شصت ", " هفتاد ", " هشتاد ", " نود "],
+        sadgan = [" یکصد ", " دویست ", " سیصد ", " چهارصد ", " پانصد ", " ششصد ", " هفتصد ", " هشتصد ", " نهصد "],
+        dah = [" ده ", " یازده ", " دوازده ", " سیزده ", " چهارده ", " پانزده ", " شانزده ", " هفده ", " هیجده ", " نوزده "];
     if (level > 0) {
         result += " و ";
         level -= 1;
     }
-   
+
     if (num < 10) {
         result += yekan[num - 1];
     } else if (num < 20) {
         result += dah[num - 10];
     } else if (num < 100) {
-        result += dahgan[parseInt(num / 10, 10) - 2] +  wordifyfa(num % 10, level + 1);
+        result += dahgan[parseInt(num / 10, 10) - 2] + wordifyfa(num % 10, level + 1);
     } else if (num < 1000) {
         result += sadgan[parseInt(num / 100, 10) - 1] + wordifyfa(num % 100, level + 1);
     } else if (num < 1000000) {
@@ -62,31 +85,30 @@ var wordifyfa = function (num, level) {
     } else if (num < 1000000000000000) {
         result += wordifyfa(parseInt(num / 1000000000000, 10), level) + " تریلیارد " + wordifyfa(num % 1000000000000, level + 1);
     }
-	return result;
+    return result;
 
 };
 
-var wordifyRials = function (num) {
-	'use strict';
+var wordifyRials = function(num) {
+    'use strict';
     return wordifyfa(num, 0) + " ریال";
 };
 
-var wordifyRialsInTomans = function (num) {
-	'use strict';
+var wordifyRialsInTomans = function(num) {
+    'use strict';
     if (num >= 10) {
         num = parseInt(num / 10, 10);
-    } else if (num<=-10) {
-        num = parseInt(num/10,10);
+    } else if (num <= -10) {
+        num = parseInt(num / 10, 10);
     } else {
-		num=0;
-	}
-	
+        num = 0;
+    }
+
     return wordifyfa(num, 0) + " تومان";
 };
 
 if (typeof module !== 'undefined' && module.exports) {
-	module.exports.wordifyfa = wordifyfa;
-	module.exports.wordifyRials = wordifyRials;
-	module.exports.wordifyRialsInTomans = wordifyRialsInTomans;
+    module.exports.wordifyfa = wordifyfa;
+    module.exports.wordifyRials = wordifyRials;
+    module.exports.wordifyRialsInTomans = wordifyRialsInTomans;
 }
-
