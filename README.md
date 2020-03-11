@@ -9,6 +9,13 @@ var c = wordifyRials(a); // دویست و سی و پنج هزار ریال
 var d = wordifyRialsInTomans(a); // بیست و سه هزار و پانصد تومان
 
 ```
+# update (2020-03-11)
+- non english digits support (arabic/persian)
+```javascript
+var a = '۱۲۰۳۴۵۱۰۲';
+var b = wordifyfa(a);
+console.log(b); // یکصد و بیست میلیون و سیصد و چهل و پنج هزار و صد و یکصد و دو
+```
 
 # update (2019-09-11)
 - string and thousands separated numbers now supported
