@@ -28,7 +28,7 @@ or if you using Node.js
 
 ```javascipt 
 var wordifyfa = require('./wordifyfa.js');
-````
+```
 
 2- use the code.
 ```javascript
@@ -58,7 +58,7 @@ or in Node :
 ```javascript
 	var a = require('./wordifyfa.js');
 	a.worifyfaRials(number);
-````
+```
 	
 ## 3 converts number that is in Rials to Tomans and wordifies it
 
@@ -71,7 +71,13 @@ or in Node :
 ```javascript
 	var a = require('./wordifyfa.js');
 	a.wordifyRialsInTomans(number);
-````
+```
+
+## 4 supports converting persian and arabic digits 
+
+```javascript
+	wordifyfa('۱۲۰۰۰۰')
+```
 
 # more info:
 this code now supports max to 999,999,999,999,999. is it sufficient?
