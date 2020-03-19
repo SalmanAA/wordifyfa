@@ -14,8 +14,8 @@ var wordifyfa = function(num, level) {
     function toEnglishDigits(num) {
         if (typeof num !== 'string')
             return num;
-        const faDigits = '۰۱۲۳۴۵۶۷۸۹';
-        const arDigits = '٠١٢٣٤٥٦٧٨٩';
+        var faDigits = '۰۱۲۳۴۵۶۷۸۹';
+        var arDigits = '٠١٢٣٤٥٦٧٨٩';
         var output = "";
         for (var ipos = 0; ipos < num.length; ipos++) {
 
