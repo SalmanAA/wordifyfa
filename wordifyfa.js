@@ -1,7 +1,7 @@
 // Persian Wordifier
-// Version: 1.2
+// Version: 1.2.0
 // Author: Salman Arab Ameri
-// Publish: 2019-09-11
+// Publish: 2020-04-16
 // with use of ideas in http://www.dotnettips.info/post/626/%D8%AA%D8%A8%D8%AF%DB%8C%D9%84-%D8%B9%D8%AF%D8%AF-%D8%A8%D9%87-%D8%AD%D8%B1%D9%88%D9%81
 
 var wordifyfa = function(num, level) {
