@@ -9,6 +9,9 @@ var c = wordifyRials(a); // دویست و سی و پنج هزار ریال
 var d = wordifyRialsInTomans(a); // بیست و سه هزار و پانصد تومان
 
 ```
+# update (2020-04-18)
+- npm package created (npm i wordifyfa)
+
 # update (2020-03-11)
 - non english digits support (arabic/persian)
 ```javascript
@@ -31,7 +34,7 @@ console.log(b); // یکصد و بیست میلیون و سیصد و چهل و پ
 <script src="wordifyfa.js"></script>
 ```	
 
-or if you using Node.js 
+or if you are using Node.js 
 
 ```shell
 npm i wordifyfa
