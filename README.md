@@ -33,15 +33,31 @@ console.log(b); // یکصد و بیست میلیون و سیصد و چهل و پ
 
 or if you using Node.js 
 
+```shell
+npm i wordifyfa
+```
+
 ```javascipt 
-var wordifyfa = require('./wordifyfa.js');
+var wf = require('wordifyfa.js');
 ```
 
 2- use the code.
+
+in javascript:
+
 ```javascript
     var a = 93390;
     var b = wordifyfa(a); // نود و سه هزار و سیصد و نود
+```
+
+in Node.js:
+
+```javascript
+    var a = 93390;
+    var b = wf.wordifyfa(a); // نود و سه هزار و سیصد و نود
 ```	
+
+following examples are in javascript. if you want use it in Node.js, you must change it as same as previous sample.
 
 # functions:
 ## 1 converts number to words
