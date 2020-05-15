@@ -9,6 +9,10 @@ var c = wordifyRials(a); // دویست و سی و پنج هزار ریال
 var d = wordifyRialsInTomans(a); // بیست و سه هزار و پانصد تومان
 
 ```
+
+# update (2020-05-15)
+- project source reimplemented in typescript
+
 # update (2020-04-18)
 - npm package created (npm i wordifyfa)
 

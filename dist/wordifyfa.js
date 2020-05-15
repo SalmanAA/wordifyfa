@@ -86,21 +86,11 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-// Persian Wordifier
-// Version: 1.2
-// Author: Salman Arab Ameri
-// Publish: 2019-09-11
-// with use of ideas in http://www.dotnettips.info/post/626/%D8%AA%D8%A8%D8%AF%DB%8C%D9%84-%D8%B9%D8%AF%D8%AF-%D8%A8%D9%87-%D8%AD%D8%B1%D9%88%D9%81
-
-var wordifyfa = function(num, level) {
-    'use strict';
-
-    function isCorrectNumber(num) {
-        return /^-?(\d{1,3},?)+(\.?\d+)?$/.test(num);
-    }
-
+var __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_RESULT__;function wordifyfa(num, level) {
+    if (level === void 0) { level = 0; }
+    console.log(num + " " + level);
     function toEnglishDigits(num) {
         if (typeof num !== 'string')
             return num;
@@ -108,7 +98,6 @@ var wordifyfa = function(num, level) {
         var arDigits = '٠١٢٣٤٥٦٧٨٩';
         var output = "";
         for (var ipos = 0; ipos < num.length; ipos++) {
-
             var faIndex = faDigits.indexOf(num[ipos]);
             if (faIndex >= 0) {
                 output += faIndex.toString();
@@ -121,22 +110,12 @@ var wordifyfa = function(num, level) {
             }
             output += num[ipos];
         }
-        return output;
+        return parseInt(output.replace(/,/g, ""));
     }
-
     if (num === null) {
         return "";
     }
     num = toEnglishDigits(num);
-    level = level || 0;
-
-    // remove all non digits from string
-    if (level === 0 && typeof num === "string" && isCorrectNumber(num)) {
-        num = parseInt(num.replace(/,/g, ""));
-    }
-
-
-    // convert negative number to positive and get wordify value
     if (num < 0) {
         num = num * -1;
         return "منفی " + wordifyfa(num, level);
@@ -144,64 +123,79 @@ var wordifyfa = function(num, level) {
     if (num === 0) {
         if (level === 0) {
             return "صفر";
-        } else {
+        }
+        else {
             return "";
         }
     }
-    var result = "",
-        yekan = [" یک ", " دو ", " سه ", " چهار ", " پنج ", " شش ", " هفت ", " هشت ", " نه "],
-        dahgan = [" بیست ", " سی ", " چهل ", " پنجاه ", " شصت ", " هفتاد ", " هشتاد ", " نود "],
-        sadgan = [" یکصد ", " دویست ", " سیصد ", " چهارصد ", " پانصد ", " ششصد ", " هفتصد ", " هشتصد ", " نهصد "],
-        dah = [" ده ", " یازده ", " دوازده ", " سیزده ", " چهارده ", " پانزده ", " شانزده ", " هفده ", " هیجده ", " نوزده "];
+    var result = "";
+    var yekan = [" یک ", " دو ", " سه ", " چهار ", " پنج ", " شش ", " هفت ", " هشت ", " نه "], dahgan = [" بیست ", " سی ", " چهل ", " پنجاه ", " شصت ", " هفتاد ", " هشتاد ", " نود "], sadgan = [" یکصد ", " دویست ", " سیصد ", " چهارصد ", " پانصد ", " ششصد ", " هفتصد ", " هشتصد ", " نهصد "], dah = [" ده ", " یازده ", " دوازده ", " سیزده ", " چهارده ", " پانزده ", " شانزده ", " هفده ", " هیجده ", " نوزده "];
     if (level > 0) {
         result += " و ";
         level -= 1;
     }
-
     if (num < 10) {
         result += yekan[num - 1];
-    } else if (num < 20) {
+    }
+    else if (num < 20) {
         result += dah[num - 10];
-    } else if (num < 100) {
-        result += dahgan[parseInt(num / 10, 10) - 2] + wordifyfa(num % 10, level + 1);
-    } else if (num < 1000) {
-        result += sadgan[parseInt(num / 100, 10) - 1] + wordifyfa(num % 100, level + 1);
-    } else if (num < 1000000) {
-        result += wordifyfa(parseInt(num / 1000, 10), level) + " هزار " + wordifyfa(num % 1000, level + 1);
-    } else if (num < 1000000000) {
-        result += wordifyfa(parseInt(num / 1000000, 10), level) + " میلیون " + wordifyfa(num % 1000000, level + 1);
-    } else if (num < 1000000000000) {
-        result += wordifyfa(parseInt(num / 1000000000, 10), level) + " میلیارد " + wordifyfa(num % 1000000000, level + 1);
-    } else if (num < 1000000000000000) {
-        result += wordifyfa(parseInt(num / 1000000000000, 10), level) + " تریلیارد " + wordifyfa(num % 1000000000000, level + 1);
+    }
+    else if (num < 100) {
+        result += dahgan[Math.floor(num / 10) - 2] + wordifyfa(num % 10, level + 1);
+    }
+    else if (num < 1000) {
+        result += sadgan[Math.floor(num / 100) - 1] + wordifyfa(num % 100, level + 1);
+    }
+    else if (num < 1000000) {
+        result += wordifyfa(Math.floor(num / 1000), level) + " هزار " + wordifyfa(num % 1000, level + 1);
+    }
+    else if (num < 1000000000) {
+        result += wordifyfa(Math.floor(num / 1000000), level) + " میلیون " + wordifyfa(num % 1000000, level + 1);
+    }
+    else if (num < 1000000000000) {
+        result += wordifyfa(Math.floor(num / 1000000000), level) + " میلیارد " + wordifyfa(num % 1000000000, level + 1);
+    }
+    else if (num < 1000000000000000) {
+        result += wordifyfa(Math.floor(num / 1000000000000), level) + " تریلیارد " + wordifyfa(num % 1000000000000, level + 1);
     }
     return result;
-
-};
-
-var wordifyRials = function(num) {
-    'use strict';
+}
+function wordifyRials(num) {
     return wordifyfa(num, 0) + " ریال";
-};
-
-var wordifyRialsInTomans = function(num) {
-    'use strict';
-    if (num >= 10) {
-        num = parseInt(num / 10, 10);
-    } else if (num <= -10) {
-        num = parseInt(num / 10, 10);
-    } else {
+}
+function wordifyRialsInTomans(num) {
+    if (typeof num == "string") {
+        num = parseInt(num);
+    }
+    if (num >= 10 || num <= -10) {
+        num = Math.floor(num / 10);
+    }
+    else {
         num = 0;
     }
-
     return wordifyfa(num, 0) + " تومان";
-};
-
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports.wordifyfa = wordifyfa;
-    module.exports.wordifyRials = wordifyRials;
-    module.exports.wordifyRialsInTomans = wordifyRialsInTomans;
 }
+(function () {
+    if (window) {
+        window["wordifyfa"] = wordifyfa;
+        window["wordifyRials"] = wordifyRials;
+        window["wordifyRialsInTomans"] = wordifyRialsInTomans;
+    }
+    else if (typeof module !== "undefined" && module.exports) {
+        module.exports["wordifyfa"] = wordifyfa;
+        module.exports["wordifyRials"] = wordifyRials;
+        module.exports["wordifyRialsInTomans"] = wordifyRialsInTomans;
+    }
+    else if (true) {
+        !(__WEBPACK_AMD_DEFINE_RESULT__ = (function () { return wordifyfa; }).call(exports, __webpack_require__, exports, module),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+        !(__WEBPACK_AMD_DEFINE_RESULT__ = (function () { return wordifyRials; }).call(exports, __webpack_require__, exports, module),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+        !(__WEBPACK_AMD_DEFINE_RESULT__ = (function () { return wordifyRialsInTomans; }).call(exports, __webpack_require__, exports, module),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+    }
+}());
+
 
 /***/ })
 /******/ ]);
