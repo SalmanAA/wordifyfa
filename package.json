@@ -5,9 +5,9 @@
     "main": "wordifyfa.js",
     "dependencies": {},
     "devDependencies": {
+        "terser-webpack-plugin": "^4.2.3",
         "ts-loader": "^7.0.4",
         "typescript": "^3.9.2",
-        "uglifyjs-webpack-plugin": "^2.2.0",
         "webpack": "^4.42.0"
     },
     "scripts": {

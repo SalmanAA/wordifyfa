@@ -90,7 +90,6 @@
 
 var __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_RESULT__;var __WEBPACK_AMD_DEFINE_RESULT__;function wordifyfa(num, level) {
     if (level === void 0) { level = 0; }
-    console.log(num + " " + level);
     function toEnglishDigits(num) {
         if (typeof num !== 'string')
             return num;
