@@ -4,35 +4,16 @@
 // Publish: 2020-05-15
 // with use of ideas in http://www.dotnettips.info/post/626/%D8%AA%D8%A8%D8%AF%DB%8C%D9%84-%D8%B9%D8%AF%D8%AF-%D8%A8%D9%87-%D8%AD%D8%B1%D9%88%D9%81
 
-function wordifyfa(num:string|number, level:number=0):string {
-    function toEnglishDigits(num:string|number):number {
-        if (typeof num !== 'string')
-            return num;
-        const faDigits = '۰۱۲۳۴۵۶۷۸۹';
-        const arDigits = '٠١٢٣٤٥٦٧٨٩';
-        let output = "";
-        for (let ipos = 0; ipos < num.length; ipos++) {
+import toEnglishDigits from "./toEnglishDigits";
 
-            let faIndex = faDigits.indexOf(num[ipos]);
-            if (faIndex >= 0) {
-                output += faIndex.toString();
-                continue;
-            }
-            let arIndex = arDigits.indexOf(num[ipos]);
-            if (arIndex >= 0) {
-                output += arIndex.toString();
-                continue;
-            }
-            output += num[ipos];
-        }
-        return parseInt(output.replace(/,/g, ""));
-    }
+export function wordifyfa(input:string|number, level:number=0):string {
+    
 
-    if (num === null) {
+    if (input === null) {
         return "";
     }
 
-    num = toEnglishDigits(num);
+    var num:number = parseInt(toEnglishDigits(input));
     
 
     // convert negative number to positive and get wordify value
@@ -53,7 +34,7 @@ function wordifyfa(num:string|number, level:number=0):string {
         sadgan = [" یکصد ", " دویست ", " سیصد ", " چهارصد ", " پانصد ", " ششصد ", " هفتصد ", " هشتصد ", " نهصد "],
         dah = [" ده ", " یازده ", " دوازده ", " سیزده ", " چهارده ", " پانزده ", " شانزده ", " هفده ", " هیجده ", " نوزده "];
     if (level > 0) {
-        result += " و ";
+        result += "و";
         level -= 1;
     }
 
@@ -75,17 +56,25 @@ function wordifyfa(num:string|number, level:number=0):string {
         result += wordifyfa(Math.floor(num / 1000000000000), level) + " تریلیارد " + wordifyfa(num % 1000000000000, level + 1);
     }
 
-    return result;
+    return result.trim();
 }
 
-function wordifyRials(num:string|number):string {
+export function wordifyRials(num:string|number):string {
+    if (num === null || num === undefined || num === "") {
+        return "";
+    }
     return wordifyfa(num, 0) + " ریال";
 }
 
-function wordifyRialsInTomans(num:string|number):string {
-    if(typeof num == "string") {
-        num=parseInt(num);
+export function wordifyRialsInTomans(num:string|number):string {
+    if(num === null || num === undefined || num === "") {
+        return "";
     }
+    if(typeof num == "string") {
+        var cleanNumber = toEnglishDigits(num);
+        num=parseInt(cleanNumber);
+    }
+    
     if (num >= 10 || num<=-10) {
         num = Math.floor(num / 10);
     } else {
@@ -99,7 +88,7 @@ declare var module: any;
 
 (function() {
     //expose it through Window
-    if (window) {
+    if (typeof window !== "undefined") {
         //exportables.forEach(exp => (window as any)[nameof(exp)] = exp);
         (window as any)["wordifyfa"] = wordifyfa;
         (window as any)["wordifyRials"] = wordifyRials;
