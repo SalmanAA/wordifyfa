@@ -46,7 +46,20 @@ describe('wordifyfa', function() {
     it('should return correct result for number with thousand separator', function() {
       assert.equal(wordifyfa("457,200"), "چهارصد و پنجاه و هفت هزار و دویست");
     });
+
     it('should return correct result for big numbers', function() {
       assert.equal(wordifyfa("40000000000"), "چهل میلیارد");
     });    
+
+    it('should return correct result for milion numbers', function() {
+      assert.equal(wordifyfa("128000130"), "یکصد و بیست و هشت میلیون و یکصد و سی");
+    });     
+
+    it('should return correct result for triliard numbers', function() {
+      assert.equal(wordifyfa("9000000000000"), "نه تریلیارد");
+    });     
+
+    it('should return correct result for biggest possible number', function() {
+      assert.equal(wordifyfa("999999999999999"), "نهصد و نود و نه تریلیارد و نهصد و نود و نه میلیارد و نهصد و نود و نه میلیون و نهصد و نود و نه هزار و نهصد و نود و نه");
+    });     
 });

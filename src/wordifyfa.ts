@@ -13,7 +13,7 @@ export function wordifyfa(input:string|number, level:number=0):string {
         return "";
     }
 
-    var num:number = parseInt(toEnglishDigits(input));
+    let num:number = parseInt(toEnglishDigits(input));
     
 
     // convert negative number to positive and get wordify value
@@ -29,12 +29,13 @@ export function wordifyfa(input:string|number, level:number=0):string {
         }
     }
     let result = "";
-    const yekan = [" یک ", " دو ", " سه ", " چهار ", " پنج ", " شش ", " هفت ", " هشت ", " نه "],
-        dahgan = [" بیست ", " سی ", " چهل ", " پنجاه ", " شصت ", " هفتاد ", " هشتاد ", " نود "],
-        sadgan = [" یکصد ", " دویست ", " سیصد ", " چهارصد ", " پانصد ", " ششصد ", " هفتصد ", " هشتصد ", " نهصد "],
-        dah = [" ده ", " یازده ", " دوازده ", " سیزده ", " چهارده ", " پانزده ", " شانزده ", " هفده ", " هیجده ", " نوزده "];
+    const yekan = ["یک", "دو", "سه", "چهار", "پنج", "شش", "هفت", "هشت", "نه"],
+        dahgan = ["بیست", "سی", "چهل", "پنجاه", "شصت", "هفتاد", "هشتاد", "نود"],
+        sadgan = ["یکصد", "دویست", "سیصد", "چهارصد", "پانصد", "ششصد", "هفتصد", "هشتصد", "نهصد"],
+        dah = ["ده", "یازده", "دوازده", "سیزده", "چهارده", "پانزده", "شانزده", "هفده", "هیجده", "نوزده"];
+
     if (level > 0) {
-        result += "و";
+        result += " و ";
         level -= 1;
     }
 
@@ -47,16 +48,16 @@ export function wordifyfa(input:string|number, level:number=0):string {
     } else if (num < 1000) {
         result += sadgan[Math.floor(num / 100) - 1] + wordifyfa(num % 100, level + 1);
     } else if (num < 1000000) {
-        result += wordifyfa(Math.floor(num / 1000), level) + " هزار " + wordifyfa(num % 1000, level + 1);
+        result += wordifyfa(Math.floor(num / 1000), level) + " هزار" + wordifyfa(num % 1000, level + 1);
     } else if (num < 1000000000) {
-        result += wordifyfa(Math.floor(num / 1000000), level) + " میلیون " + wordifyfa(num % 1000000, level + 1);
+        result += wordifyfa(Math.floor(num / 1000000), level) + " میلیون" + wordifyfa(num % 1000000, level + 1);
     } else if (num < 1000000000000) {
-        result += wordifyfa(Math.floor(num / 1000000000), level) + " میلیارد " + wordifyfa(num % 1000000000, level + 1);
+        result += wordifyfa(Math.floor(num / 1000000000), level) + " میلیارد" + wordifyfa(num % 1000000000, level + 1);
     } else if (num < 1000000000000000) {
-        result += wordifyfa(Math.floor(num / 1000000000000), level) + " تریلیارد " + wordifyfa(num % 1000000000000, level + 1);
+        result += wordifyfa(Math.floor(num / 1000000000000), level) + " تریلیارد" + wordifyfa(num % 1000000000000, level + 1);
     }
 
-    return result.trim();
+    return result;
 }
 
 export function wordifyRials(num:string|number):string {
