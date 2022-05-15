@@ -13,7 +13,7 @@ var g = wordifyMomentApprox("2022-05-04 10:20:00"); // هفت ساعت پیش
 vsr h = momentApprox("2022-05-04 10:20:00"); // 7 ساعت پیش
 ```
 
-** Warning!** in javascript, month starts from zero so new Date(2022,4,4,10,20,0) means month 5 (May)
+*Warning!* in javascript, month starts from zero so new Date(2022,4,4,10,20,0) means month 5 (May)
 
 # update (2022-05-15)
 - approximate time calculation added
