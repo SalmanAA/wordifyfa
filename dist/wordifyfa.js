@@ -6,10 +6,15 @@
 /***/ ((module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 
 
+// UNUSED EXPORTS: momentApprox, wordifyMomentApprox, wordifyRials, wordifyRialsInTomans, wordifyfa
+
 ;// CONCATENATED MODULE: ./src/toEnglishDigits.ts
 function toEnglishDigits(num) {
-    if (typeof num !== 'string')
-        return num;
+    if (num === null || num === undefined) {
+        return null;
+    }
+    if (typeof num !== 'string' || num.length === 0)
+        return num.toString();
     var faDigits = '۰۱۲۳۴۵۶۷۸۹';
     var arDigits = '٠١٢٣٤٥٦٧٨٩';
     var output = "";
@@ -26,18 +31,18 @@ function toEnglishDigits(num) {
         }
         output += num[ipos];
     }
-    return parseInt(output.replace(/,/g, ""));
+    return output.replace(/,/g, "");
 }
 
 ;// CONCATENATED MODULE: ./src/wordifyfa.ts
 /* module decorator */ module = __webpack_require__.hmd(module);
 
-function wordifyfa(num, level) {
+function wordifyfa(input, level) {
     if (level === void 0) { level = 0; }
-    if (num === null) {
+    if (input === null) {
         return "";
     }
-    num = toEnglishDigits(num);
+    var num = parseInt(toEnglishDigits(input));
     if (num < 0) {
         num = num * -1;
         return "منفی " + wordifyfa(num, level);
@@ -51,7 +56,7 @@ function wordifyfa(num, level) {
         }
     }
     var result = "";
-    var yekan = [" یک ", " دو ", " سه ", " چهار ", " پنج ", " شش ", " هفت ", " هشت ", " نه "], dahgan = [" بیست ", " سی ", " چهل ", " پنجاه ", " شصت ", " هفتاد ", " هشتاد ", " نود "], sadgan = [" یکصد ", " دویست ", " سیصد ", " چهارصد ", " پانصد ", " ششصد ", " هفتصد ", " هشتصد ", " نهصد "], dah = [" ده ", " یازده ", " دوازده ", " سیزده ", " چهارده ", " پانزده ", " شانزده ", " هفده ", " هیجده ", " نوزده "];
+    var yekan = ["یک", "دو", "سه", "چهار", "پنج", "شش", "هفت", "هشت", "نه"], dahgan = ["بیست", "سی", "چهل", "پنجاه", "شصت", "هفتاد", "هشتاد", "نود"], sadgan = ["یکصد", "دویست", "سیصد", "چهارصد", "پانصد", "ششصد", "هفتصد", "هشتصد", "نهصد"], dah = ["ده", "یازده", "دوازده", "سیزده", "چهارده", "پانزده", "شانزده", "هفده", "هیجده", "نوزده"];
     if (level > 0) {
         result += " و ";
         level -= 1;
@@ -69,25 +74,32 @@ function wordifyfa(num, level) {
         result += sadgan[Math.floor(num / 100) - 1] + wordifyfa(num % 100, level + 1);
     }
     else if (num < 1000000) {
-        result += wordifyfa(Math.floor(num / 1000), level) + " هزار " + wordifyfa(num % 1000, level + 1);
+        result += wordifyfa(Math.floor(num / 1000), level) + " هزار" + wordifyfa(num % 1000, level + 1);
     }
     else if (num < 1000000000) {
-        result += wordifyfa(Math.floor(num / 1000000), level) + " میلیون " + wordifyfa(num % 1000000, level + 1);
+        result += wordifyfa(Math.floor(num / 1000000), level) + " میلیون" + wordifyfa(num % 1000000, level + 1);
     }
     else if (num < 1000000000000) {
-        result += wordifyfa(Math.floor(num / 1000000000), level) + " میلیارد " + wordifyfa(num % 1000000000, level + 1);
+        result += wordifyfa(Math.floor(num / 1000000000), level) + " میلیارد" + wordifyfa(num % 1000000000, level + 1);
     }
     else if (num < 1000000000000000) {
-        result += wordifyfa(Math.floor(num / 1000000000000), level) + " تریلیارد " + wordifyfa(num % 1000000000000, level + 1);
+        result += wordifyfa(Math.floor(num / 1000000000000), level) + " تریلیارد" + wordifyfa(num % 1000000000000, level + 1);
     }
     return result;
 }
 function wordifyRials(num) {
+    if (num === null || num === undefined || num === "") {
+        return "";
+    }
     return wordifyfa(num, 0) + " ریال";
 }
 function wordifyRialsInTomans(num) {
+    if (num === null || num === undefined || num === "") {
+        return "";
+    }
     if (typeof num == "string") {
-        num = parseInt(num);
+        var cleanNumber = toEnglishDigits(num);
+        num = parseInt(cleanNumber);
     }
     if (num >= 10 || num <= -10) {
         num = Math.floor(num / 10);
@@ -97,21 +109,84 @@ function wordifyRialsInTomans(num) {
     }
     return wordifyfa(num, 0) + " تومان";
 }
+function momentApprox(date, baseDate, suffixBefore, suffixAfter) {
+    if (suffixBefore === void 0) { suffixBefore = "پیش"; }
+    if (suffixAfter === void 0) { suffixAfter = "بعد"; }
+    return wordifyMomentApprox(date, baseDate, suffixBefore, suffixAfter, false);
+}
+function wordifyMomentApprox(date, baseDate, suffixBefore, suffixAfter, doWordify) {
+    if (suffixBefore === void 0) { suffixBefore = "پیش"; }
+    if (suffixAfter === void 0) { suffixAfter = "بعد"; }
+    if (doWordify === void 0) { doWordify = true; }
+    if (date === null || date === undefined || date === "") {
+        return "";
+    }
+    if (baseDate == null || baseDate == undefined || baseDate == "") {
+        baseDate = new Date();
+    }
+    if (typeof date == "string") {
+        date = new Date(date);
+    }
+    if (typeof baseDate == "string") {
+        baseDate = new Date(baseDate);
+    }
+    var suffix = suffixBefore;
+    var diff = Math.floor((baseDate.getTime() - date.getTime()) / 1000) * 1000;
+    if (diff < 0) {
+        suffix = suffixAfter;
+        diff = Math.abs(diff);
+    }
+    var diffYears = Math.floor(diff / 31557600000);
+    if (diffYears > 0) {
+        return (doWordify ? wordifyfa(diffYears) : diffYears) + " سال " + suffix;
+    }
+    var diffMonths = Math.floor(diff / 2629800000);
+    if (diffMonths > 0) {
+        return (doWordify ? wordifyfa(diffMonths) : diffMonths) + " ماه " + suffix;
+    }
+    var diffWeeks = Math.floor(diff / 604800000);
+    if (diffWeeks > 0) {
+        return (doWordify ? wordifyfa(diffWeeks) : diffWeeks) + " هفته " + suffix;
+    }
+    var diffDays = Math.floor(diff / 86400000);
+    if (diffDays > 0) {
+        return (doWordify ? wordifyfa(diffDays) : diffDays) + " روز " + suffix;
+    }
+    var diffHours = Math.floor(diff / 3600000);
+    if (diffHours > 0) {
+        return (doWordify ? wordifyfa(diffHours) : diffHours) + " ساعت " + suffix;
+    }
+    var diffMinutes = Math.floor(diff / 60000);
+    if (diffMinutes > 0) {
+        return (doWordify ? wordifyfa(diffMinutes) : diffMinutes) + " دقیقه " + suffix;
+    }
+    var diffSeconds = Math.floor(diff / 1000);
+    if (diffSeconds > 0) {
+        return "چند لحظه " + suffix;
+    }
+    return "بلافاصله";
+}
 (function () {
-    if (window) {
+    if (typeof window !== "undefined") {
         window["wordifyfa"] = wordifyfa;
         window["wordifyRials"] = wordifyRials;
         window["wordifyRialsInTomans"] = wordifyRialsInTomans;
+        window["wordifyMomentApprox"] = wordifyMomentApprox;
+        window["momentApprox"] = momentApprox;
     }
     else if ( true && module.exports) {
         module.exports["wordifyfa"] = wordifyfa;
         module.exports["wordifyRials"] = wordifyRials;
         module.exports["wordifyRialsInTomans"] = wordifyRialsInTomans;
+        module.exports["wordifyMomentApprox"] = wordifyMomentApprox;
+        module.exports["momentApprox"] = momentApprox;
     }
     else if (typeof define === 'function' && __webpack_require__.amdO) {
         define(function () { return wordifyfa; });
         define(function () { return wordifyRials; });
         define(function () { return wordifyRialsInTomans; });
+        define(function () { return wordifyMomentApprox; });
+        define(function () { return momentApprox; });
     }
 }());
 

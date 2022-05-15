@@ -40,6 +40,19 @@
         var m = '۱۲۰۰۰۰';
         var n = wordifyfa(m);
         document.write(m + ' = ' + n + "<br/>");
+
+        var e = wordifyMomentApprox(new Date(2022,4,4,10,20,0));
+        document.write(e + "<br/>");
+        var f = wordifyMomentApprox(new Date(2022,4,4,10,20,0), new Date(2022,4,4,10,21,0), "گذشته","آینده"); 
+        document.write(f + "<br/>");
+        var g = wordifyMomentApprox(new Date(2022,4,4,10,21,0), new Date(2022,4,4,10,20,0), "گذشته","آینده"); 
+        document.write(g + "<br/>");
+        var h = wordifyMomentApprox("2022-05-04 10:20:00");
+        document.write(h + "<br/>");
+
+        var i = momentApprox(new Date(2022,4,4,10,20,0));
+        document.write(i + "<br/>");
+
     </script>
 </body>
 

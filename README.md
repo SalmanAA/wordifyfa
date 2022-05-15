@@ -1,4 +1,4 @@
-Persian Wordifier converts simple numbers to words.
+Persian Wordifier converts numbers to words.
 for example you can use this:
 
 ```javascript
@@ -7,8 +7,16 @@ var b = wordifyfa(a);
 console.log(b); // دویست و سی و پنج هزار
 var c = wordifyRials(a); // دویست و سی و پنج هزار ریال
 var d = wordifyRialsInTomans(a); // بیست و سه هزار و پانصد تومان
-
+var e = wordifyMomentApprox(new Date(2022,4,4,10,20,0)); // هفت ساعت پیش 
+var f = wordifyMomentApprox(new Date(2022,4,4,10,20,0), new Date(2022,4,4,10,21,0), "قبل","بعد"); // یک دقیقه بعد 
+var g = wordifyMomentApprox("2022-05-04 10:20:00"); // هفت ساعت پیش
+vsr h = momentApprox("2022-05-04 10:20:00"); // 7 ساعت پیش
 ```
+
+** Warning!** in javascript, month starts from zero so new Date(2022,4,4,10,20,0) means month 5 (May)
+
+# update (2022-05-15)
+- approximate time calculation added
 
 # update (2020-05-15)
 - project source reimplemented in typescript
@@ -108,7 +116,18 @@ or in Node :
 ```javascript
 	wordifyfa('۱۲۰۰۰۰')
 ```
-
+## 5 convert dates to approximate time in words
+```javascript
+	wordifyMomentApprox(date,[base date=current time],[suffix if date is before base date='پیش'], [suffix if date is after base date = 'بعد']);
+	// date and base date can be string or date object
+	// base date and suffixes are optional
+```
+## 6 convert dates to approximate time in digits
+```javascript
+	momentApprox(date,[base date=current time],[suffix if date is before base date='پیش'], [suffix if date is after base date = 'بعد']);
+	// date and base date can be string or date object
+	// base date and suffixes are optional
+```
 # more info:
 this code now supports max to 999,999,999,999,999. is it sufficient?
 

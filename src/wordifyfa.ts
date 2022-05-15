@@ -83,6 +83,62 @@ export function wordifyRialsInTomans(num:string|number):string {
     }
     return wordifyfa(num, 0) + " تومان";
 }
+export function momentApprox(date:Date|string, baseDate?:Date|string, suffixBefore:string="پیش", suffixAfter:string="بعد"):string {
+    return wordifyMomentApprox(date, baseDate, suffixBefore, suffixAfter, false);
+}
+export function wordifyMomentApprox(date:Date|string, baseDate?:Date|string, suffixBefore:string="پیش", suffixAfter:string="بعد", doWordify:boolean=true):string {
+    if(date === null || date === undefined || date === "") {
+        return "";
+    }
+    if (baseDate==null || baseDate==undefined || baseDate=="") {
+        baseDate = new Date();
+    }
+    if(typeof date == "string") {
+        date = new Date(date);
+    }
+    if(typeof baseDate == "string") {
+        baseDate = new Date(baseDate);
+    }
+    let suffix = suffixBefore;
+    let diff = Math.floor((baseDate.getTime() - date.getTime())/1000) * 1000;
+    if (diff<0) {
+        suffix = suffixAfter;
+        diff = Math.abs(diff);
+    }
+    let diffYears = Math.floor(diff / 31557600000);
+    if(diffYears>0) {
+        return (doWordify ? wordifyfa(diffYears) : diffYears) + " سال " + suffix;
+    }
+    let diffMonths = Math.floor(diff / 2629800000);
+    if(diffMonths>0) {
+        return (doWordify ? wordifyfa(diffMonths):diffMonths) + " ماه " + suffix;
+    }
+    let diffWeeks = Math.floor(diff / 604800000);
+    if(diffWeeks>0) {
+        return (doWordify?wordifyfa(diffWeeks):diffWeeks) + " هفته " + suffix;
+    }
+    let diffDays = Math.floor(diff / 86400000);
+    if(diffDays>0) {
+        return (doWordify?wordifyfa(diffDays):diffDays) + " روز " + suffix;
+    }
+    let diffHours = Math.floor(diff / 3600000);
+    if(diffHours>0) {
+        return (doWordify?wordifyfa(diffHours):diffHours) + " ساعت " + suffix;
+    }
+
+    let diffMinutes = Math.floor(diff / 60000);
+    if(diffMinutes>0) {
+        return (doWordify?wordifyfa(diffMinutes):diffMinutes) + " دقیقه " + suffix;
+    }
+
+    let diffSeconds = Math.floor(diff / 1000);
+
+    if (diffSeconds > 0) {
+        return "چند لحظه " + suffix;
+    }    
+    return "بلافاصله";
+
+}
 
 declare var define: any;
 declare var module: any;
@@ -90,21 +146,29 @@ declare var module: any;
 (function() {
     //expose it through Window
     if (typeof window !== "undefined") {
-        //exportables.forEach(exp => (window as any)[nameof(exp)] = exp);
         (window as any)["wordifyfa"] = wordifyfa;
         (window as any)["wordifyRials"] = wordifyRials;
         (window as any)["wordifyRialsInTomans"] = wordifyRialsInTomans;
+        (window as any)["wordifyMomentApprox"] = wordifyMomentApprox;
+        (window as any)["momentApprox"] = momentApprox;
+
     }    
     // Node: Export function
     else if (typeof module !== "undefined" && module.exports) {
         module.exports["wordifyfa"] = wordifyfa;
         module.exports["wordifyRials"] = wordifyRials;
         module.exports["wordifyRialsInTomans"] = wordifyRialsInTomans;
+        module.exports["wordifyMomentApprox"] = wordifyMomentApprox;
+        module.exports["momentApprox"] = momentApprox;
+
     }
     // AMD/requirejs: Define the module
     else if (typeof define === 'function' && define.amd) {
         define(() => wordifyfa);
         define(() => wordifyRials);
         define(() => wordifyRialsInTomans);
+        define(() => wordifyMomentApprox);
+        define(() => momentApprox);
+
     }
 }())
