@@ -6,7 +6,7 @@
 /***/ ((module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 
 
-// UNUSED EXPORTS: momentApprox, wordifyMomentApprox, wordifyRials, wordifyRialsInTomans, wordifyfa
+// UNUSED EXPORTS: momentApprox, momentPrecise, wordifyMomentApprox, wordifyMomentPrecise, wordifyRials, wordifyRialsInTomans, wordifyfa
 
 ;// CONCATENATED MODULE: ./src/toEnglishDigits.ts
 function toEnglishDigits(num) {
@@ -165,6 +165,104 @@ function wordifyMomentApprox(date, baseDate, suffixBefore, suffixAfter, doWordif
         return "چند لحظه " + suffix;
     }
     return "بلافاصله";
+}
+function momentPrecise(date, baseDate, suffixBefore, suffixAfter) {
+    if (suffixBefore === void 0) { suffixBefore = "پیش"; }
+    if (suffixAfter === void 0) { suffixAfter = "بعد"; }
+    return wordifyMomentPrecise(date, baseDate, suffixBefore, suffixAfter, false);
+}
+function wordifyMomentPrecise(date, baseDate, suffixBefore, suffixAfter, doWordify) {
+    if (suffixBefore === void 0) { suffixBefore = "پیش"; }
+    if (suffixAfter === void 0) { suffixAfter = "بعد"; }
+    if (doWordify === void 0) { doWordify = true; }
+    if (date === null || date === undefined || date === "") {
+        return "";
+    }
+    if (baseDate == null || baseDate == undefined || baseDate == "") {
+        baseDate = new Date();
+    }
+    if (typeof date == "string") {
+        date = new Date(date);
+    }
+    if (typeof baseDate == "string") {
+        baseDate = new Date(baseDate);
+    }
+    var suffix = suffixBefore;
+    var diff = Math.floor((baseDate.getTime() - date.getTime()) / 1000) * 1000;
+    if (diff < 0) {
+        suffix = suffixAfter;
+        diff = Math.abs(diff);
+    }
+    var result = "";
+    var diffYears = Math.floor(diff / 31557600000);
+    if (diffYears > 0) {
+        diff -= (diffYears * 31557600000);
+    }
+    var diffMonths = Math.floor(diff / 2629800000);
+    if (diffMonths > 0) {
+        diff -= (diffMonths * 2629800000);
+    }
+    var diffWeeks = Math.floor(diff / 604800000);
+    if (diffWeeks > 0) {
+        diff -= (diffWeeks * 604800000);
+    }
+    var diffDays = Math.floor(diff / 86400000);
+    if (diffDays > 0) {
+        diff -= (diffDays * 86400000);
+    }
+    var diffHours = Math.floor(diff / 3600000);
+    if (diffHours > 0) {
+        diff -= (diffHours * 3600000);
+    }
+    var diffMinutes = Math.floor(diff / 60000);
+    if (diffMinutes > 0) {
+        diff -= (diffMinutes * 60000);
+    }
+    var diffSeconds = Math.floor(diff / 1000);
+    if (diffYears > 0) {
+        result = (doWordify ? wordifyfa(diffYears) : diffYears) + " سال ";
+    }
+    if (diffMonths > 0) {
+        if (result.length > 0) {
+            result += "و ";
+        }
+        result += (doWordify ? wordifyfa(diffMonths) : diffMinutes) + " ماه ";
+    }
+    if (diffWeeks > 0) {
+        if (result.length > 0) {
+            result += "و ";
+        }
+        result += (doWordify ? wordifyfa(diffWeeks) : diffWeeks) + " هفته ";
+    }
+    if (diffDays > 0) {
+        if (result.length > 0) {
+            result += "و ";
+        }
+        result += (doWordify ? wordifyfa(diffDays) : diffDays) + " روز ";
+    }
+    if (diffHours > 0) {
+        if (result.length > 0) {
+            result += "و ";
+        }
+        result += (doWordify ? wordifyfa(diffHours) : diffHours) + " ساعت ";
+    }
+    if (diffMinutes > 0) {
+        if (result.length > 0) {
+            result += "و ";
+        }
+        result += (doWordify ? wordifyfa(diffMinutes) : diffMinutes) + " دقیقه ";
+    }
+    if (diffSeconds > 0) {
+        if (result.length > 0) {
+            result += "و ";
+        }
+        result += (doWordify ? wordifyfa(diffSeconds) : diffSeconds) + " ثانیه ";
+    }
+    if (result.length == 0) {
+        return "بلافاصله";
+    }
+    result += suffix;
+    return result;
 }
 (function () {
     if (typeof window !== "undefined") {

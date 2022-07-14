@@ -83,10 +83,10 @@ export function wordifyRialsInTomans(num:string|number):string {
     }
     return wordifyfa(num, 0) + " تومان";
 }
-export function momentApprox(date:Date|string, baseDate?:Date|string, suffixBefore:string="پیش", suffixAfter:string="بعد"):string {
+export function momentApprox(date:Date|string|null, baseDate?:Date|string|null, suffixBefore:string="پیش", suffixAfter:string="بعد"):string {
     return wordifyMomentApprox(date, baseDate, suffixBefore, suffixAfter, false);
 }
-export function wordifyMomentApprox(date:Date|string, baseDate?:Date|string, suffixBefore:string="پیش", suffixAfter:string="بعد", doWordify:boolean=true):string {
+export function wordifyMomentApprox(date:Date|string|null, baseDate?:Date|string|null, suffixBefore:string="پیش", suffixAfter:string="بعد", doWordify:boolean=true):string {
     if(date === null || date === undefined || date === "") {
         return "";
     }
@@ -138,6 +138,102 @@ export function wordifyMomentApprox(date:Date|string, baseDate?:Date|string, suf
     }    
     return "بلافاصله";
 
+}
+
+export function momentPrecise(date:Date|string|null, baseDate?:Date|string|null, suffixBefore:string="پیش", suffixAfter:string="بعد"):string {
+    return wordifyMomentPrecise(date, baseDate, suffixBefore, suffixAfter, false);
+}
+
+export function wordifyMomentPrecise(date:Date|string|null, baseDate?:Date|string|null, suffixBefore:string="پیش", suffixAfter:string="بعد", doWordify:boolean=true):string {
+    if(date === null || date === undefined || date === "") {
+        return "";
+    }
+    if (baseDate==null || baseDate==undefined || baseDate=="") {
+        baseDate = new Date();
+    }
+    if(typeof date == "string") {
+        date = new Date(date);
+    }
+    if(typeof baseDate == "string") {
+        baseDate = new Date(baseDate);
+    }
+
+    let suffix = suffixBefore;
+    let diff = Math.floor((baseDate.getTime() - date.getTime())/1000) * 1000;
+    if (diff<0) {
+        suffix = suffixAfter;
+        diff = Math.abs(diff);
+    }
+
+    let result = "";
+    let diffYears = Math.floor(diff / 31557600000);
+    if (diffYears>0) {
+        diff -= (diffYears * 31557600000);
+    }
+    let diffMonths = Math.floor(diff / 2629800000);
+    if (diffMonths>0) {
+        diff -= (diffMonths * 2629800000);
+    }
+    let diffWeeks = Math.floor(diff / 604800000);
+    if (diffWeeks>0) {
+        diff -= (diffWeeks * 604800000);
+    }
+    let diffDays = Math.floor(diff / 86400000);
+    if (diffDays>0) {
+        diff -= (diffDays * 86400000);
+    }
+    let diffHours = Math.floor(diff / 3600000);
+    if (diffHours>0) {
+        diff -= (diffHours * 3600000);
+    }
+
+    let diffMinutes = Math.floor(diff / 60000);
+    if (diffMinutes>0) {
+        diff -= (diffMinutes * 60000);
+    }
+
+    let diffSeconds = Math.floor(diff / 1000);
+
+    if (diffYears > 0) {
+        result = (doWordify?wordifyfa(diffYears):diffYears) + " سال ";
+    }
+
+    if (diffMonths > 0) {
+        if(result.length>0) { 
+            result+="و "; 
+        }
+        result += (doWordify?wordifyfa(diffMonths):diffMinutes) + " ماه ";
+    }
+
+    if (diffWeeks > 0) {
+        if(result.length>0) { result+="و "; }
+        result += (doWordify?wordifyfa(diffWeeks):diffWeeks) + " هفته ";
+    }
+
+    if (diffDays > 0) {
+        if(result.length>0) { result+="و "; }
+        result += (doWordify?wordifyfa(diffDays):diffDays) + " روز ";
+    }    
+
+    if (diffHours > 0) {
+        if(result.length>0) { result+="و "; }
+        result += (doWordify?wordifyfa(diffHours):diffHours) + " ساعت ";
+    }    
+
+    if (diffMinutes > 0) {
+        if(result.length>0) { result+="و "; }
+        result += (doWordify?wordifyfa(diffMinutes):diffMinutes) + " دقیقه ";
+    }    
+
+    if (diffSeconds > 0) {
+        if (result.length>0) { result+="و "; }
+        result +=(doWordify? wordifyfa(diffSeconds):diffSeconds) + " ثانیه ";
+    }    
+    if (result.length==0) {
+        return "بلافاصله";
+    }
+    result +=suffix;
+    return result;
 }
 
 declare var define: any;

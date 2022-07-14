@@ -10,10 +10,16 @@ var d = wordifyRialsInTomans(a); // بیست و سه هزار و پانصد تو
 var e = wordifyMomentApprox(new Date(2022,4,4,10,20,0)); // هفت ساعت پیش 
 var f = wordifyMomentApprox(new Date(2022,4,4,10,20,0), new Date(2022,4,4,10,21,0), "قبل","بعد"); // یک دقیقه بعد 
 var g = wordifyMomentApprox("2022-05-04 10:20:00"); // هفت ساعت پیش
-vsr h = momentApprox("2022-05-04 10:20:00"); // 7 ساعت پیش
+var h = momentApprox("2022-05-04 10:20:00"); // 7 ساعت پیش
+var i = wordifyMomentApprox("2022-05-04 10:20:00"); // هفت ساعت و پنج دقیقه و بیست ثانیه پیش
+var j = momentPrecise("2022-05-04 10:20:00"); // 7 ساعت و 5 دقیقه و 20 ثانیه پیش
+
 ```
 
 *Warning!* in javascript, month starts from zero so new Date(2022,4,4,10,20,0) means month 5 (May)
+
+# update (2022-07-14)
+- precise time calculation added
 
 # update (2022-05-15)
 - approximate time calculation added
@@ -125,6 +131,18 @@ or in Node :
 ## 6 convert dates to approximate time in digits
 ```javascript
 	momentApprox(date,[base date=current time],[suffix if date is before base date='پیش'], [suffix if date is after base date = 'بعد']);
+	// date and base date can be string or date object
+	// base date and suffixes are optional
+```
+## 7 convert dates to precise time difference (year/month/week/day/hour/minute/second) in words
+```javascript
+	wordifyMomentPrecise(date,[base date=current time],[suffix if date is before base date='پیش'], [suffix if date is after base date = 'بعد']);
+	// date and base date can be string or date object
+	// base date and suffixes are optional
+```
+## 8 convert dates to precise time difference (year/month/week/day/hour/minute/second) in digits
+```javascript
+	momentPrecise(date,[base date=current time],[suffix if date is before base date='پیش'], [suffix if date is after base date = 'بعد']);
 	// date and base date can be string or date object
 	// base date and suffixes are optional
 ```
