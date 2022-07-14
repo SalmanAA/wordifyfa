@@ -1,6 +1,6 @@
 {
     "name": "wordifyfa",
-    "version": "1.4.0",
+    "version": "1.4.1",
     "description": "Persian Wordifier converts simple numbers to words.\r for example you can use this:",
     "main": "wordifyfa.js",
     "dependencies": {},
