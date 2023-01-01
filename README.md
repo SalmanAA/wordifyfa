@@ -7,12 +7,14 @@ var b = wordifyfa(a);
 console.log(b); // دویست و سی و پنج هزار
 var c = wordifyRials(a); // دویست و سی و پنج هزار ریال
 var d = wordifyRialsInTomans(a); // بیست و سه هزار و پانصد تومان
-var e = wordifyMomentApprox(new Date(2022,4,4,10,20,0)); // هفت ساعت پیش 
-var f = wordifyMomentApprox(new Date(2022,4,4,10,20,0), new Date(2022,4,4,10,21,0), "قبل","بعد"); // یک دقیقه بعد 
-var g = wordifyMomentApprox("2022-05-04 10:20:00"); // هفت ساعت پیش
-var h = momentApprox("2022-05-04 10:20:00"); // 7 ساعت پیش
-var i = wordifyMomentPrecise("2022-05-04 10:20:00"); // هفت ساعت و پنج دقیقه و بیست ثانیه پیش
-var j = momentPrecise("2022-05-04 10:20:00"); // 7 ساعت و 5 دقیقه و 20 ثانیه پیش
+var e = 235736;
+var f = wordifyRialsInTomans(e); //  بیست  و  سه  هزار  و  پانصد  و  هفتاد  و  سه  تومان و  شش  ریال
+var g = wordifyMomentApprox(new Date(2022,4,4,10,20,0)); // هفت ساعت پیش 
+var h = wordifyMomentApprox(new Date(2022,4,4,10,20,0), new Date(2022,4,4,10,21,0), "قبل","بعد"); // یک دقیقه بعد 
+var i = wordifyMomentApprox("2022-05-04 10:20:00"); // هفت ساعت پیش
+var j = momentApprox("2022-05-04 10:20:00"); // 7 ساعت پیش
+var k = wordifyMomentPrecise("2022-05-04 10:20:00"); // هفت ساعت و پنج دقیقه و بیست ثانیه پیش
+var l = momentPrecise("2022-05-04 10:20:00"); // 7 ساعت و 5 دقیقه و 20 ثانیه پیش
 
 ```
 
