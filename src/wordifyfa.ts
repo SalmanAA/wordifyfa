@@ -76,12 +76,16 @@ export function wordifyRialsInTomans(num:string|number):string {
         num=parseInt(cleanNumber);
     }
     
+    const originalAmount = num;
     if (num >= 10 || num<=-10) {
         num = Math.floor(num / 10);
     } else {
         num = 0;
     }
-    return wordifyfa(num, 0) + " تومان";
+    const haveRial = (originalAmount / 10).toString().split(".")[1];
+    return (num ? wordifyfa(num, 0) + " تومان" : "") +
+        (num && haveRial ? " و " : "") +
+        (haveRial ? `${wordifyfa(haveRial, 0)} ریال` : "");
 }
 export function momentApprox(date:Date|string|null, baseDate?:Date|string|null, suffixBefore:string="پیش", suffixAfter:string="بعد"):string {
     return wordifyMomentApprox(date, baseDate, suffixBefore, suffixAfter, false);
