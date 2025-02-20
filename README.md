@@ -15,10 +15,14 @@ var i = wordifyMomentApprox("2022-05-04 10:20:00"); // هفت ساعت پیش
 var j = momentApprox("2022-05-04 10:20:00"); // 7 ساعت پیش
 var k = wordifyMomentPrecise("2022-05-04 10:20:00"); // هفت ساعت و پنج دقیقه و بیست ثانیه پیش
 var l = momentPrecise("2022-05-04 10:20:00"); // 7 ساعت و 5 دقیقه و 20 ثانیه پیش
-
+var m = wordifyfa(934120, {convertDigits: false}); // 934 هزار و 120
 ```
 
 *Warning!* in javascript, month starts from zero so new Date(2022,4,4,10,20,0) means month 5 (May)
+
+# update (2025-02-20)
+- options added
+- now you can enable/disable converting digits. for example 125530 => 125 هزار و 530 or یکصد و بیست و پنج هزار و پانصد و سی
 
 # update (2022-07-14)
 - precise time calculation added
