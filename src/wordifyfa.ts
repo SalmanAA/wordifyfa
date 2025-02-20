@@ -6,7 +6,7 @@
 
 import toEnglishDigits from "./toEnglishDigits";
 
-export function wordifyfa(input:string|number, level:number=0):string {
+export function wordifyfa(input:string|number|null|undefined, level:number=0):string {
     
 
     if (input === null) {
@@ -60,14 +60,14 @@ export function wordifyfa(input:string|number, level:number=0):string {
     return result;
 }
 
-export function wordifyRials(num:string|number):string {
+export function wordifyRials(num:string|number|null|undefined):string {
     if (num === null || num === undefined || num === "") {
         return "";
     }
     return wordifyfa(num, 0) + " ریال";
 }
 
-export function wordifyRialsInTomans(num:string|number):string {
+export function wordifyRialsInTomans(num:string|number|null|undefined):string {
     if(num === null || num === undefined || num === "") {
         return "";
     }
@@ -83,14 +83,14 @@ export function wordifyRialsInTomans(num:string|number):string {
         num = 0;
     }
     const haveRial = (originalAmount / 10).toString().split(".")[1];
-    return (num ? wordifyfa(num, 0) + " تومان" : "") +
+    return wordifyfa(num, 0) + " تومان";
         (num && haveRial ? " و " : "") +
         (haveRial ? `${wordifyfa(haveRial, 0)} ریال` : "");
 }
-export function momentApprox(date:Date|string|null, baseDate?:Date|string|null, suffixBefore:string="پیش", suffixAfter:string="بعد"):string {
+export function momentApprox(date:Date|string|null|undefined, baseDate?:Date|string|null|undefined, suffixBefore:string="پیش", suffixAfter:string="بعد"):string {
     return wordifyMomentApprox(date, baseDate, suffixBefore, suffixAfter, false);
 }
-export function wordifyMomentApprox(date:Date|string|null, baseDate?:Date|string|null, suffixBefore:string="پیش", suffixAfter:string="بعد", doWordify:boolean=true):string {
+export function wordifyMomentApprox(date:Date|string|null|undefined, baseDate?:Date|string|null|undefined, suffixBefore:string="پیش", suffixAfter:string="بعد", doWordify:boolean=true):string {
     if(date === null || date === undefined || date === "") {
         return "";
     }
@@ -144,11 +144,11 @@ export function wordifyMomentApprox(date:Date|string|null, baseDate?:Date|string
 
 }
 
-export function momentPrecise(date:Date|string|null, baseDate?:Date|string|null, suffixBefore:string="پیش", suffixAfter:string="بعد"):string {
+export function momentPrecise(date:Date|string|null, baseDate?:Date|string|null|undefined, suffixBefore:string="پیش", suffixAfter:string="بعد"):string {
     return wordifyMomentPrecise(date, baseDate, suffixBefore, suffixAfter, false);
 }
 
-export function wordifyMomentPrecise(date:Date|string|null, baseDate?:Date|string|null, suffixBefore:string="پیش", suffixAfter:string="بعد", doWordify:boolean=true):string {
+export function wordifyMomentPrecise(date:Date|string|null|undefined, baseDate?:Date|string|null|undefined, suffixBefore:string="پیش", suffixAfter:string="بعد", doWordify:boolean=true):string {
     if(date === null || date === undefined || date === "") {
         return "";
     }

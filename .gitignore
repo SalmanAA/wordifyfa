@@ -1,7 +1,7 @@
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
-
+.nyc_*/
 # Folder config file
 Desktop.ini
 

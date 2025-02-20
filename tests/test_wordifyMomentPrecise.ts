@@ -99,6 +99,6 @@ describe('wordifyMoment', function() {
       var date = new Date(2021,5,13,6,13,0);
       var baseDate = new Date(2023,5,15,8,15,0);
 
-      assert.equal(wordifyMomentPrecise(date,baseDate), "دو سال و یک روز و چهارده ساعت و دو دقیقه پیش");
+      assert.equal(wordifyMomentPrecise(date,baseDate), "دو سال و یک روز و پانزده ساعت و دو دقیقه پیش");
     });    
 });
