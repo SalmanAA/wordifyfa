@@ -7,7 +7,7 @@
     "devDependencies": {
         "@types/mocha": "^9.0.0",
         "assert": "^2.0.0",
-        "nyc": "^15.1.0",
+        "nyc": "^18.0.0",
         "terser-webpack-plugin": "^5.1.4",
         "ts-loader": "^9.2.5",
         "ts-node": "^10.4.0",
